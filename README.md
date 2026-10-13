@@ -9,7 +9,8 @@ do not show.
 
 | Post | Folder |
 |---|---|
-| [AI made reverse engineering cheap. Checking it didn't get cheaper.](https://suleymankilinc.com/blog/ai-made-reverse-engineering-cheap) | [`reverse-engineering/`](reverse-engineering/) |
+| [AI made reverse engineering cheap. Checking it didn't get cheaper.](https://suleymankilinc.com/blog/ai-made-reverse-engineering-cheap) | [`reverse-engineering/part1-own-java/`](reverse-engineering/part1-own-java/) |
+| [Part 2: a blind test on a program I had never seen](https://suleymankilinc.com/blog/blind-test-rebuilding-a-program-i-never-saw) | [`reverse-engineering/part2-blind-test/`](reverse-engineering/part2-blind-test/) |
 
 ## Conventions
 

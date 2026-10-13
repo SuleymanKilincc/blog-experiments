@@ -1,6 +1,6 @@
 # Reverse engineering with an AI assistant
 
-Evidence for the post [AI made reverse engineering cheap. Checking it didn't get cheaper.](https://suleymankilinc.com/blog/ai-made-reverse-engineering-cheap)
+Evidence for the posts [AI made reverse engineering cheap. Checking it didn't get cheaper.](https://suleymankilinc.com/blog/ai-made-reverse-engineering-cheap) (Part 1) and [Part 2: a blind test on a program I had never seen](https://suleymankilinc.com/blog/blind-test-rebuilding-a-program-i-never-saw).
 
 The question: if a released Java program is obfuscated, how much of it can an AI assistant
 (Claude) rebuild from the decompiled bytecode, and how do you prove the rebuild is right?
