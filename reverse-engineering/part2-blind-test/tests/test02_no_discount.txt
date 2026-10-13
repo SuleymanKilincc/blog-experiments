@@ -1,0 +1,13 @@
+# TEST 02 - İndirimsiz Basit Sipariş
+# REGULAR müşteri, %0 indirimli kategori. Ödenen = taban fiyat.
+
+ADD_CATEGORY KITAP Kitap 0
+ADD_PRODUCT P001 Python_Programlama KITAP 120.00 50
+ADD_CUSTOMER C001 Ali_Vural REGULAR
+
+CREATE_ORDER O001 C001
+ADD_ITEM O001 P001 1
+FINALIZE_ORDER O001
+
+ORDER_DETAIL O001
+# Beklenen: grand total = 120.00 (indirim yok)

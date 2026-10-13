@@ -1,0 +1,15 @@
+# TEST 06 - PLATINUM Müşteri Tier İndirimi (%15)
+# Ürün: 10000 TL, kategori %10
+# Kalem sonrası: 10000 * 0.90 = 9000
+# Platinum tier %15: 9000 * 0.85 = 7650.00
+# Beklenen grand total: 7650.00
+
+ADD_CATEGORY ELEC Elektronik 10
+ADD_PRODUCT P001 Profesyonel_Kamera ELEC 10000.00 5
+ADD_CUSTOMER C001 Deniz_Akin PLATINUM
+
+CREATE_ORDER O001 C001
+ADD_ITEM O001 P001 1
+FINALIZE_ORDER O001
+
+ORDER_DETAIL O001

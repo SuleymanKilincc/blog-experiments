@@ -1,0 +1,44 @@
+# TEST 12 - Tüm İndirimler Birlikte
+# PLATINUM müşteri, %10 kategori, 5+ adet, sadakat, kupon
+# 5 sipariş önceden tamamlanmış → sadakat aktif
+# Ürün: 1000 TL birim fiyat, 6 adet
+
+ADD_CATEGORY ELEC Elektronik 10
+ADD_PRODUCT P001 Akilli_Saat ELEC 1000.00 100
+ADD_CUSTOMER C001 VIP_Musteri PLATINUM
+ADD_COUPON MEGA25 25 0
+
+# 5 önceki sipariş (sadakat bonusu kazanma)
+ADD_CATEGORY GEN Genel 0
+ADD_PRODUCT P099 Doldurma GEN 1.00 100
+CREATE_ORDER PRE1 C001
+ADD_ITEM PRE1 P099 1
+FINALIZE_ORDER PRE1
+CREATE_ORDER PRE2 C001
+ADD_ITEM PRE2 P099 1
+FINALIZE_ORDER PRE2
+CREATE_ORDER PRE3 C001
+ADD_ITEM PRE3 P099 1
+FINALIZE_ORDER PRE3
+CREATE_ORDER PRE4 C001
+ADD_ITEM PRE4 P099 1
+FINALIZE_ORDER PRE4
+CREATE_ORDER PRE5 C001
+ADD_ITEM PRE5 P099 1
+FINALIZE_ORDER PRE5
+
+# Asıl sipariş: 6 adet Akilli_Saat (toplu indirim: 6 >= 5)
+# Hesaplama:
+#   birim fiyat    = 1000
+#   katman indirim = kat %10: 1000*0.90 = 900
+#   toplu indirim  = bulk %5: 900*0.95 = 855 (hayir, kalem bazli)
+#   Kalem: 1000 * 0.90 * 0.95 = 855.00 birim, 6*855 = 5130.00 subtotal
+#   Platinum %15: 5130 * 0.85 = 4360.50
+#   Sadakat %2:   4360.50 * 0.98 = 4273.29
+#   Kupon %25:    4273.29 * 0.75 = 3204.97
+CREATE_ORDER O001 C001
+ADD_ITEM O001 P001 6
+APPLY_COUPON O001 MEGA25
+FINALIZE_ORDER O001
+
+ORDER_DETAIL O001

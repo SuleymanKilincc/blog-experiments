@@ -1,0 +1,25 @@
+# TEST 14 - Sipariş İptali ve Stok Geri Yükleme
+# Stok: 10. Sipariş O001: 7 adet rezerve. İptal sonrası stok 10'a döner.
+
+ADD_CATEGORY GEN Genel 0
+ADD_PRODUCT P001 Sandalye GEN 250.00 10
+ADD_CUSTOMER C001 Iptali_Seven REGULAR
+
+STOCK_REPORT
+# Stok: 10
+
+CREATE_ORDER O001 C001
+ADD_ITEM O001 P001 7
+STOCK_REPORT
+# Stok: 3 (7 rezerve edildi)
+
+CANCEL_ORDER O001
+STOCK_REPORT
+# Stok: 10 (7 iade edildi)
+
+# Yeni sipariş ile stok tekrar kullanılabilir
+CREATE_ORDER O002 C001
+ADD_ITEM O002 P001 9
+FINALIZE_ORDER O002
+STOCK_REPORT
+# Stok: 1

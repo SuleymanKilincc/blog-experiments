@@ -1,0 +1,15 @@
+# TEST 05 - GOLD Müşteri Tier İndirimi (%10)
+# Ürün: 500 TL, kategori %5
+# Kalem sonrası: 500 * 0.95 = 475
+# Gold tier %10: 475 * 0.90 = 427.50
+# Beklenen grand total: 427.50
+
+ADD_CATEGORY SPOR Spor 5
+ADD_PRODUCT P001 Tenis_Raketi SPOR 500.00 25
+ADD_CUSTOMER C001 Kemal_Ozcan GOLD
+
+CREATE_ORDER O001 C001
+ADD_ITEM O001 P001 1
+FINALIZE_ORDER O001
+
+ORDER_DETAIL O001

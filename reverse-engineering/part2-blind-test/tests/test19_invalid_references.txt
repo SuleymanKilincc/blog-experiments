@@ -1,0 +1,26 @@
+# TEST 19 - Geçersiz Müşteri ve Ürün Hataları
+
+ADD_CATEGORY GEN Genel 0
+ADD_PRODUCT P001 Kalem GEN 10.00 50
+ADD_CUSTOMER C001 Gercek_Musteri REGULAR
+
+# Var olmayan müşteriyle sipariş oluştur
+CREATE_ORDER O001 YOK_MUSTERI
+# Beklenen: ERROR müşteri bulunamadı
+
+# Var olmayan ürün eklemeye çalış
+CREATE_ORDER O001 C001
+ADD_ITEM O001 YOK_URUN 1
+# Beklenen: ERROR ürün bulunamadı
+
+# Var olmayan siparişe ürün ekle
+ADD_ITEM YOKORDER P001 1
+# Beklenen: ERROR sipariş bulunamadı
+
+# Var olmayan kategoriye ürün ekle
+ADD_PRODUCT P002 Silgi YOKKATEGORI 5.00 10
+# Beklenen: ERROR kategori bulunamadı
+
+# Var olmayan siparişe kupon uygula
+APPLY_COUPON YOKORDER KUPON
+# Beklenen: ERROR sipariş bulunamadı

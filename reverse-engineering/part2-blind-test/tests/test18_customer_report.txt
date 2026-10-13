@@ -1,0 +1,21 @@
+# TEST 18 - Müşteri Raporu ve Sipariş Geçmişi
+
+ADD_CATEGORY GEN Genel 0
+ADD_PRODUCT P001 Urun GEN 500.00 100
+ADD_CUSTOMER C001 Geçmişli_Müşteri SILVER
+
+CUSTOMER_REPORT C001
+# Beklenen: 0 sipariş, 0 harcama, sadakat pasif
+
+CREATE_ORDER O001 C001
+ADD_ITEM O001 P001 2
+FINALIZE_ORDER O001
+
+CREATE_ORDER O002 C001
+ADD_ITEM O002 P001 1
+FINALIZE_ORDER O002
+
+CUSTOMER_REPORT C001
+# Beklenen: 2 sipariş, toplam harcama gösterilmeli
+
+LIST_CUSTOMERS

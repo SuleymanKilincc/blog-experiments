@@ -1,0 +1,34 @@
+# TEST 21 - Boş Sipariş ve Kapalı Sipariş Hataları
+
+ADD_CATEGORY GEN Genel 0
+ADD_PRODUCT P001 Urun GEN 100.00 50
+ADD_CUSTOMER C001 Musteri REGULAR
+
+# Boş siparişi tamamlama denemesi
+CREATE_ORDER O001 C001
+FINALIZE_ORDER O001
+# Beklenen: ERROR sipariş boş
+
+# Ürün ekle ve tamamla
+ADD_ITEM O001 P001 1
+FINALIZE_ORDER O001
+# Beklenen: OK
+
+# Tamamlanmış siparişe işlem denemesi
+ADD_ITEM O001 P001 2
+# Beklenen: ERROR sipariş açık değil (Finalized)
+
+CANCEL_ORDER O001
+# Beklened: ERROR sipariş açık değil (Finalized)
+
+FINALIZE_ORDER O001
+# Beklenen: ERROR sipariş açık değil
+
+# Yeni sipariş aç ve iptal et, sonra aynı siparişi tekrar iptal et
+CREATE_ORDER O002 C001
+ADD_ITEM O002 P001 1
+CANCEL_ORDER O002
+# Beklenen: OK
+
+CANCEL_ORDER O002
+# Beklenen: ERROR sipariş açık değil (Cancelled)

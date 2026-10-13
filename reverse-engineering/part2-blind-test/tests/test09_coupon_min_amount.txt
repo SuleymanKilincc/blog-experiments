@@ -1,0 +1,25 @@
+# TEST 09 - Minimum Tutarli Kupon
+# Kupon min tutar: 500 TL
+# Sipariş 1: 300 TL (kupon gecersiz)
+# Sipariş 2: 600 TL (kupon gecerli)
+
+ADD_CATEGORY GEN Genel 0
+ADD_PRODUCT P001 Urun_A GEN 300.00 50
+ADD_PRODUCT P002 Urun_B GEN 600.00 50
+ADD_CUSTOMER C001 Hasan_Yildiz REGULAR
+ADD_COUPON VIP20 20 500
+
+# Siparis 1: 300 TL - kupon min tutarini karsilamiyor
+CREATE_ORDER O001 C001
+ADD_ITEM O001 P001 1
+APPLY_COUPON O001 VIP20
+FINALIZE_ORDER O001
+# Beklenen: ERROR (min tutar karsilanmiyor)
+
+# Siparis 2: 600 TL - kupon gecerli
+CREATE_ORDER O002 C001
+ADD_ITEM O002 P002 1
+APPLY_COUPON O002 VIP20
+FINALIZE_ORDER O002
+ORDER_DETAIL O002
+# Beklenen: 600 * 0.80 = 480.00

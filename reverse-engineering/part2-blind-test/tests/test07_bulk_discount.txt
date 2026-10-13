@@ -1,0 +1,23 @@
+# TEST 07 - Toplu Indirim (5+ adet)
+# 4 adet: toplu indirim YOK, 5 adet: toplu indirim VAR (%5 ek)
+# Ürün: 200 TL, kategori %0, REGULAR
+
+# 4 adet sipariş (toplu indirim tetiklenmez)
+ADD_CATEGORY GIDA Gida 0
+ADD_PRODUCT P001 Deterjan GIDA 200.00 100
+ADD_CUSTOMER C001 Test_Musteri REGULAR
+
+CREATE_ORDER O001 C001
+ADD_ITEM O001 P001 4
+FINALIZE_ORDER O001
+ORDER_DETAIL O001
+# Beklenen: 4 * 200 = 800.00 (indirim yok)
+
+# 5 adet sipariş (toplu indirim devreye girer: %5)
+# Birim: 200 * 0.95 = 190, Toplam: 5 * 190 = 950.00
+ADD_CUSTOMER C002 Test_Musteri2 REGULAR
+CREATE_ORDER O002 C002
+ADD_ITEM O002 P001 5
+FINALIZE_ORDER O002
+ORDER_DETAIL O002
+# Beklenen: 5 * 200 * 0.95 = 950.00

@@ -1,0 +1,14 @@
+# TEST 03 - Kategori İndirimi
+# Elektronik kategorisi %15 indirim. REGULAR müşteri.
+# Fiyat: 2000 * 0.85 = 1700.00
+
+ADD_CATEGORY ELEC Elektronik 15
+ADD_PRODUCT P001 Tablet ELEC 2000.00 30
+ADD_CUSTOMER C001 Banu_Arslan REGULAR
+
+CREATE_ORDER O001 C001
+ADD_ITEM O001 P001 1
+FINALIZE_ORDER O001
+
+ORDER_DETAIL O001
+# Beklenen: grand total = 1700.00 (yalnizca kategori indirimi)

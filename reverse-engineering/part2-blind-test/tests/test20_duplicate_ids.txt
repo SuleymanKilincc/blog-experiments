@@ -1,0 +1,26 @@
+# TEST 20 - Tekrar ID Hataları (Duplicate)
+
+ADD_CATEGORY ELEC Elektronik 10
+ADD_CATEGORY ELEC Elektronik2 5
+# Beklenen: ERROR kategori zaten mevcut
+
+ADD_PRODUCT P001 Laptop ELEC 1000.00 10
+ADD_PRODUCT P001 Bilgisayar ELEC 1200.00 5
+# Beklenen: ERROR ürün zaten mevcut
+
+ADD_CUSTOMER C001 Ali REGULAR
+ADD_CUSTOMER C001 Veli GOLD
+# Beklenen: ERROR müşteri zaten mevcut
+
+ADD_COUPON KOD10 10 0
+ADD_COUPON KOD10 15 100
+# Beklenen: ERROR kupon zaten mevcut
+
+CREATE_ORDER O001 C001
+ADD_ITEM O001 P001 1
+CREATE_ORDER O001 C001
+# Beklenen: ERROR sipariş zaten mevcut
+
+# Aynı ürünü aynı siparişe iki kez eklemeye çalış
+ADD_ITEM O001 P001 2
+# Beklenen: ERROR ürün zaten siparişte mevcut

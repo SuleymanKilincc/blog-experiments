@@ -1,0 +1,35 @@
+# TEST 28 - Stok Tükenmesi Senaryosu
+# Stok 10 adet. Birden fazla müşteri aynı ürünü satın almaya çalışır.
+
+ADD_CATEGORY GEN Genel 0
+ADD_PRODUCT P001 Son_Urun GEN 200.00 10
+ADD_CUSTOMER C001 Musteri1 REGULAR
+ADD_CUSTOMER C002 Musteri2 REGULAR
+ADD_CUSTOMER C003 Musteri3 REGULAR
+
+# C001: 4 adet (stok: 6)
+CREATE_ORDER O001 C001
+ADD_ITEM O001 P001 4
+FINALIZE_ORDER O001
+STOCK_REPORT
+
+# C002: 5 adet (stok: 1)
+CREATE_ORDER O002 C002
+ADD_ITEM O002 P001 5
+FINALIZE_ORDER O002
+STOCK_REPORT
+
+# C003: 3 adet isteniyor ama 1 adet var
+CREATE_ORDER O003 C003
+ADD_ITEM O003 P001 3
+# Beklenen: ERROR yetersiz stok
+
+ADD_ITEM O003 P001 1
+FINALIZE_ORDER O003
+STOCK_REPORT
+# Stok: 0 → OUT-OF-STOCK
+
+# C001: Tekrar almaya çalışır
+CREATE_ORDER O004 C001
+ADD_ITEM O004 P001 1
+# Beklened: ERROR out-of-stock

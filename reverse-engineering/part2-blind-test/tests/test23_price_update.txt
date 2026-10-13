@@ -1,0 +1,24 @@
+# TEST 23 - Fiyat Güncelleme
+# Sipariş öncesi fiyat: 500 TL → Güncelleme → 750 TL
+# Yeni siparişler güncel fiyatı kullanır.
+
+ADD_CATEGORY GEN Genel 0
+ADD_PRODUCT P001 Mikrofon GEN 500.00 20
+ADD_CUSTOMER C001 Kayitci REGULAR
+
+# Eski fiyatla sipariş
+CREATE_ORDER O001 C001
+ADD_ITEM O001 P001 2
+FINALIZE_ORDER O001
+ORDER_DETAIL O001
+# Beklenen: 2 * 500 = 1000
+
+# Fiyat güncelle
+UPDATE_PRICE P001 750.00
+
+# Yeni fiyatla sipariş
+CREATE_ORDER O002 C001
+ADD_ITEM O002 P001 2
+FINALIZE_ORDER O002
+ORDER_DETAIL O002
+# Beklenen: 2 * 750 = 1500

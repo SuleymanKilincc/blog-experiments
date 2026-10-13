@@ -1,0 +1,17 @@
+# TEST 13 - Stok Yetersizliği
+# Stok 3, sipariş 5 → ERROR
+
+ADD_CATEGORY GEN Genel 0
+ADD_PRODUCT P001 Sinirli_Urun GEN 100.00 3
+ADD_CUSTOMER C001 Musteri REGULAR
+
+CREATE_ORDER O001 C001
+ADD_ITEM O001 P001 5
+# Beklenen: ERROR yetersiz stok (5 istendi, 3 mevcut)
+
+ADD_ITEM O001 P001 3
+FINALIZE_ORDER O001
+ORDER_DETAIL O001
+
+# Stok raporu: P001 artık 0
+STOCK_REPORT

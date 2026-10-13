@@ -1,0 +1,34 @@
+# TEST 26 - Toplu İndirim Eşiği: 4 vs 5 vs 10
+# Farklı miktarlarda alınan aynı ürün, toplu indirim tetiklenme durumu
+
+ADD_CATEGORY GEN Genel 0
+ADD_PRODUCT P001 Kalem GEN 100.00 100
+ADD_CUSTOMER C001 Musteri REGULAR
+
+# 4 adet: toplu indirim YOK
+CREATE_ORDER O001 C001
+ADD_ITEM O001 P001 4
+FINALIZE_ORDER O001
+ORDER_DETAIL O001
+# Beklenen: 4 * 100 = 400
+
+# 5 adet: toplu indirim VAR (%5)
+CREATE_ORDER O002 C001
+ADD_ITEM O002 P001 5
+FINALIZE_ORDER O002
+ORDER_DETAIL O002
+# Beklenen: 5 * 100 * 0.95 = 475
+
+# 10 adet: toplu indirim VAR (%5)
+CREATE_ORDER O003 C001
+ADD_ITEM O003 P001 10
+FINALIZE_ORDER O003
+ORDER_DETAIL O003
+# Beklened: 10 * 100 * 0.95 = 950
+
+# 1 adet: toplu indirim YOK
+CREATE_ORDER O004 C001
+ADD_ITEM O004 P001 1
+FINALIZE_ORDER O004
+ORDER_DETAIL O004
+# Beklenen: 1 * 100 = 100

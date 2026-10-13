@@ -1,0 +1,23 @@
+# TEST 15 - Stok Yenileme (RESTOCK)
+# Başlangıç stok: 2. Sipariş 5 adet → HATA.
+# Yenileme: +8. Yeni stok: 10. Sipariş 5 adet → BAŞARILI.
+
+ADD_CATEGORY GEN Genel 0
+ADD_PRODUCT P001 Defter GEN 15.00 2
+ADD_CUSTOMER C001 Kitapci REGULAR
+
+STOCK_REPORT
+# Stok: 2
+
+CREATE_ORDER O001 C001
+ADD_ITEM O001 P001 5
+# Beklenen: ERROR yetersiz stok
+
+RESTOCK P001 8
+STOCK_REPORT
+# Stok: 10
+
+ADD_ITEM O001 P001 5
+FINALIZE_ORDER O001
+STOCK_REPORT
+# Stok: 5

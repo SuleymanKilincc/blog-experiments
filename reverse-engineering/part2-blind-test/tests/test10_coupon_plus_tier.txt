@@ -1,0 +1,18 @@
+# TEST 10 - Kupon + Tier Indirimi Birlesimi
+# GOLD müşteri (%10 tier), kupon %15
+# Ürün: 2000 TL, kategori %0
+# Tier: 2000 * 0.90 = 1800
+# Kupon: 1800 * 0.85 = 1530.00
+# Beklenen grand total: 1530.00
+
+ADD_CATEGORY GEN Genel 0
+ADD_PRODUCT P001 Yazarkasa GEN 2000.00 10
+ADD_CUSTOMER C001 Ipek_Sahin GOLD
+ADD_COUPON GOLD15 15 0
+
+CREATE_ORDER O001 C001
+ADD_ITEM O001 P001 1
+APPLY_COUPON O001 GOLD15
+FINALIZE_ORDER O001
+
+ORDER_DETAIL O001

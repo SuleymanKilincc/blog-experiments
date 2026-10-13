@@ -1,0 +1,14 @@
+# TEST 04 - SILVER Müşteri Tier İndirimi (%5)
+# Ürün: 1000 TL, kategori indirimi yok (%0)
+# Tier indirimi: 1000 * 0.05 = 50
+# Beklenen grand total: 950.00
+
+ADD_CATEGORY GEN Genel 0
+ADD_PRODUCT P001 Koltuk GEN 1000.00 10
+ADD_CUSTOMER C001 Selin_Tas SILVER
+
+CREATE_ORDER O001 C001
+ADD_ITEM O001 P001 1
+FINALIZE_ORDER O001
+
+ORDER_DETAIL O001

@@ -1,0 +1,8 @@
+# Downloaded by reverse-engineering/tools/get-tools.ps1
+reverse-engineering/tools/*.zip
+reverse-engineering/tools/*.jar
+reverse-engineering/tools/proguard-*/
+# Build output
+*.class
+build/
+out/
